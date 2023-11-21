@@ -1,5 +1,11 @@
 # @gradio/file
 
+## 0.2.8
+
+### Features
+
+- [#6511](https://github.com/gradio-app/gradio/pull/6511) [`71f1a1f99`](https://github.com/gradio-app/gradio/commit/71f1a1f9931489d465c2c1302a5c8d768a3cd23a) - Mark `FileData.orig_name` optional on the frontend aligning the type definition on the Python side.  Thanks [@whitphx](https://github.com/whitphx)!
+
 ## 0.2.7
 
 ### Patch Changes
