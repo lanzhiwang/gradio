@@ -21,12 +21,12 @@ parser.add_argument("num_demos", help="number of demos to launch", type=int, def
 args = parser.parse_args()
 
 # get the list of directory names
-demos_list = next(os.walk('.'))[1]
+demos_list = next(os.walk("."))[1]
 
 # Some demos are just too large or need to be run in a special way, so we'll just skip them
-demos_list.remove('streaming_wav2vec')
-demos_list.remove('blocks_neural_instrument_coding')
-demos_list.remove('flagged')
+demos_list.remove("streaming_wav2vec")
+demos_list.remove("blocks_neural_instrument_coding")
+demos_list.remove("flagged")
 
 for d, demo_name in enumerate(random.sample(demos_list, args.num_demos)):
     print(f"Launching demo {d+1}/{args.num_demos}: {demo_name}")
@@ -34,7 +34,8 @@ for d, demo_name in enumerate(random.sample(demos_list, args.num_demos)):
     run = importlib.import_module(f"{demo_name}.run")
     demo: gr.Blocks = run.demo
     if d == args.num_demos - 1:
-        demo.launch(prevent_thread_lock=False, inbrowser=True)  # prevent main thread from exiting
+        demo.launch(
+            prevent_thread_lock=False, inbrowser=True
+        )  # prevent main thread from exiting
     else:
         demo.launch(prevent_thread_lock=True, inbrowser=True)
-        

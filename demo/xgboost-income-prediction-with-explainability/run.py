@@ -27,6 +27,7 @@ data = xgb.DMatrix(X_train, label=y_train, enable_categorical=True)
 model = xgb.train(params={"objective": "binary:logistic"}, dtrain=data)
 explainer = shap.TreeExplainer(model)
 
+
 def predict(*args):
     df = pd.DataFrame([args], columns=X_train.columns)
     df = df.astype({col: "category" for col in categorical_columns})
@@ -58,9 +59,11 @@ unique_sex = sorted(X_train["sex"].unique())
 unique_country = sorted(X_train["native.country"].unique())
 
 with gr.Blocks() as demo:
-    gr.Markdown("""
+    gr.Markdown(
+        """
     **Income Classification with XGBoost 💰**:  This demo uses an XGBoost classifier predicts income based on demographic factors, along with Shapley value-based *explanations*. The [source code for this Gradio demo is here](https://huggingface.co/spaces/gradio/xgboost-income-prediction-with-explainability/blob/main/app.py).
-    """)
+    """
+    )
     with gr.Row():
         with gr.Column():
             age = gr.Slider(label="Age", minimum=17, maximum=90, step=1, randomize=True)

@@ -1,4 +1,4 @@
-import gradio as gr 
+import gradio as gr
 
 with gr.Blocks() as demo:
     cheetahs = [
@@ -16,7 +16,7 @@ with gr.Blocks() as demo:
     btn.click(lambda: cheetahs, None, [gallery])
 
     def select(select_data: gr.SelectData):
-        return select_data.value['image']['url']
+        return select_data.value["image"]["url"]
 
     gallery.select(select, None, select_output)
 

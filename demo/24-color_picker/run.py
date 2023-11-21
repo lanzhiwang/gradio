@@ -5,7 +5,6 @@ from PIL import Image, ImageColor
 
 
 def change_color(icon, color):
-
     """
     Function that given an icon in .png format changes its color
     Args:

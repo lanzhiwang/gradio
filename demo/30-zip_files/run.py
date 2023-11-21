@@ -10,14 +10,21 @@ def zip_files(files):
             zipObj.write(file.name, file.name.split("/")[-1])
     return "tmp.zip"
 
+
 demo = gr.Interface(
     zip_files,
     gr.File(file_count="multiple", file_types=["text", ".json", ".csv"]),
     "file",
-    examples=[[[os.path.join(os.path.dirname(__file__),"files/titanic.csv"), 
-    os.path.join(os.path.dirname(__file__),"files/titanic.csv"), 
-    os.path.join(os.path.dirname(__file__),"files/titanic.csv")]]], 
-    cache_examples=True
+    examples=[
+        [
+            [
+                os.path.join(os.path.dirname(__file__), "files/titanic.csv"),
+                os.path.join(os.path.dirname(__file__), "files/titanic.csv"),
+                os.path.join(os.path.dirname(__file__), "files/titanic.csv"),
+            ]
+        ]
+    ],
+    cache_examples=True,
 )
 
 if __name__ == "__main__":

@@ -4,21 +4,37 @@ from functools import partial
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.cluster import (
-    AgglomerativeClustering, Birch, DBSCAN, KMeans, MeanShift, OPTICS, SpectralClustering, estimate_bandwidth
+    AgglomerativeClustering,
+    Birch,
+    DBSCAN,
+    KMeans,
+    MeanShift,
+    OPTICS,
+    SpectralClustering,
+    estimate_bandwidth,
 )
 from sklearn.datasets import make_blobs, make_circles, make_moons
 from sklearn.mixture import GaussianMixture
 from sklearn.neighbors import kneighbors_graph
 from sklearn.preprocessing import StandardScaler
 
-plt.style.use('seaborn-v0_8')
+plt.style.use("seaborn-v0_8")
 SEED = 0
 MAX_CLUSTERS = 10
 N_SAMPLES = 1000
 N_COLS = 3
 FIGSIZE = 7, 7  # does not affect size in webpage
 COLORS = [
-    'blue', 'orange', 'green', 'red', 'purple', 'brown', 'pink', 'gray', 'olive', 'cyan'
+    "blue",
+    "orange",
+    "green",
+    "red",
+    "purple",
+    "brown",
+    "pink",
+    "gray",
+    "olive",
+    "cyan",
 ]
 if len(COLORS) <= MAX_CLUSTERS:
     raise ValueError("Not enough different colors for all clusters")
@@ -27,6 +43,7 @@ np.random.seed(SEED)
 
 def normalize(X):
     return StandardScaler().fit_transform(X)
+
 
 def get_regular(n_clusters):
     # spiral pattern
@@ -43,12 +60,16 @@ def get_regular(n_clusters):
         [2, -1],
     ][:n_clusters]
     assert len(centers) == n_clusters
-    X, labels = make_blobs(n_samples=N_SAMPLES, centers=centers, cluster_std=0.25, random_state=SEED)
+    X, labels = make_blobs(
+        n_samples=N_SAMPLES, centers=centers, cluster_std=0.25, random_state=SEED
+    )
     return normalize(X), labels
 
 
 def get_circles(n_clusters):
-    X, labels = make_circles(n_samples=N_SAMPLES, factor=0.5, noise=0.05, random_state=SEED)
+    X, labels = make_circles(
+        n_samples=N_SAMPLES, factor=0.5, noise=0.05, random_state=SEED
+    )
     return normalize(X), labels
 
 
@@ -59,7 +80,9 @@ def get_moons(n_clusters):
 
 def get_noise(n_clusters):
     np.random.seed(SEED)
-    X, labels = np.random.rand(N_SAMPLES, 2), np.random.randint(0, n_clusters, size=(N_SAMPLES,))
+    X, labels = np.random.rand(N_SAMPLES, 2), np.random.randint(
+        0, n_clusters, size=(N_SAMPLES,)
+    )
     return normalize(X), labels
 
 
@@ -74,7 +97,10 @@ def get_varied(n_clusters):
     cluster_std = [1.0, 2.5, 0.5, 1.0, 2.5, 0.5, 1.0, 2.5, 0.5, 1.0][:n_clusters]
     assert len(cluster_std) == n_clusters
     X, labels = make_blobs(
-        n_samples=N_SAMPLES, centers=n_clusters, cluster_std=cluster_std, random_state=SEED
+        n_samples=N_SAMPLES,
+        centers=n_clusters,
+        cluster_std=cluster_std,
+        random_state=SEED,
     )
     return normalize(X), labels
 
@@ -94,13 +120,13 @@ def get_spiral(n_clusters):
 
 
 DATA_MAPPING = {
-    'regular': get_regular,
-    'circles': get_circles,
-    'moons': get_moons,
-    'spiral': get_spiral,
-    'noise': get_noise,
-    'anisotropic': get_anisotropic,
-    'varied': get_varied,
+    "regular": get_regular,
+    "circles": get_circles,
+    "moons": get_moons,
+    "spiral": get_spiral,
+    "noise": get_noise,
+    "anisotropic": get_anisotropic,
+    "varied": get_varied,
 }
 
 
@@ -114,7 +140,9 @@ def get_groundtruth_model(X, labels, n_clusters, **kwargs):
 
 
 def get_kmeans(X, labels, n_clusters, **kwargs):
-    model = KMeans(init="k-means++", n_clusters=n_clusters, n_init=10, random_state=SEED)
+    model = KMeans(
+        init="k-means++", n_clusters=n_clusters, n_init=10, random_state=SEED
+    )
     model.set_params(**kwargs)
     return model.fit(X)
 
@@ -126,9 +154,7 @@ def get_dbscan(X, labels, n_clusters, **kwargs):
 
 
 def get_agglomerative(X, labels, n_clusters, **kwargs):
-    connectivity = kneighbors_graph(
-        X, n_neighbors=n_clusters, include_self=False
-    )
+    connectivity = kneighbors_graph(X, n_neighbors=n_clusters, include_self=False)
     # make connectivity symmetric
     connectivity = 0.5 * (connectivity + connectivity.T)
     model = AgglomerativeClustering(
@@ -173,22 +199,24 @@ def get_birch(X, labels, n_clusters, **kwargs):
 
 def get_gaussianmixture(X, labels, n_clusters, **kwargs):
     model = GaussianMixture(
-        n_components=n_clusters, covariance_type="full", random_state=SEED,
+        n_components=n_clusters,
+        covariance_type="full",
+        random_state=SEED,
     )
     model.set_params(**kwargs)
     return model.fit(X)
 
 
 MODEL_MAPPING = {
-    'True labels': get_groundtruth_model,
-    'KMeans': get_kmeans,
-    'DBSCAN': get_dbscan,
-    'MeanShift': get_meanshift,
-    'SpectralClustering': get_spectral,
-    'OPTICS': get_optics,
-    'Birch': get_birch,
-    'GaussianMixture': get_gaussianmixture,
-    'AgglomerativeClustering': get_agglomerative,
+    "True labels": get_groundtruth_model,
+    "KMeans": get_kmeans,
+    "DBSCAN": get_dbscan,
+    "MeanShift": get_meanshift,
+    "SpectralClustering": get_spectral,
+    "OPTICS": get_optics,
+    "Birch": get_birch,
+    "GaussianMixture": get_gaussianmixture,
+    "AgglomerativeClustering": get_agglomerative,
 }
 
 
@@ -204,7 +232,7 @@ def plot_clusters(ax, X, labels):
     # show outliers (if any)
     idx = labels == -1
     if sum(idx):
-        ax.scatter(X[idx, 0], X[idx, 1], c='k', marker='x')
+        ax.scatter(X[idx, 0], X[idx, 1], c="k", marker="x")
 
     ax.grid(None)
     ax.set_xticks([])
@@ -214,7 +242,7 @@ def plot_clusters(ax, X, labels):
 
 def cluster(dataset: str, n_clusters: int, clustering_algorithm: str):
     if isinstance(n_clusters, dict):
-        n_clusters = n_clusters['value']
+        n_clusters = n_clusters["value"]
     else:
         n_clusters = int(n_clusters)
 
@@ -249,22 +277,15 @@ def iter_grid(n_rows, n_cols):
                 with gr.Column():
                     yield
 
+
 with gr.Blocks(title=title) as demo:
     gr.HTML(f"<b>{title}</b>")
     gr.Markdown(description)
 
     input_models = list(MODEL_MAPPING)
-    input_data = gr.Radio(
-        list(DATA_MAPPING),
-        value="regular",
-        label="dataset"
-    )
+    input_data = gr.Radio(list(DATA_MAPPING), value="regular", label="dataset")
     input_n_clusters = gr.Slider(
-        minimum=1,
-        maximum=MAX_CLUSTERS,
-        value=4,
-        step=1,
-        label='Number of clusters'
+        minimum=1, maximum=MAX_CLUSTERS, value=4, step=1, label="Number of clusters"
     )
     n_rows = int(math.ceil(len(input_models) / N_COLS))
     counter = 0
@@ -276,7 +297,9 @@ with gr.Blocks(title=title) as demo:
         plot = gr.Plot(label=input_model)
         fn = partial(cluster, clustering_algorithm=input_model)
         input_data.change(fn=fn, inputs=[input_data, input_n_clusters], outputs=plot)
-        input_n_clusters.change(fn=fn, inputs=[input_data, input_n_clusters], outputs=plot)
+        input_n_clusters.change(
+            fn=fn, inputs=[input_data, input_n_clusters], outputs=plot
+        )
         counter += 1
 
 demo.launch()

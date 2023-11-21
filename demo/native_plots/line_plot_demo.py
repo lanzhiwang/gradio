@@ -20,12 +20,12 @@ def line_plot_fn(dataset):
             x_lim=None,
             y_lim=None,
             stroke_dash=None,
-            tooltip=['date', 'price', 'symbol'],
+            tooltip=["date", "price", "symbol"],
             overlay_point=False,
             title="Stock Prices",
             stroke_dash_legend_title=None,
             height=300,
-            width=500
+            width=500,
         )
     elif dataset == "climate":
         return gr.LinePlot(
@@ -36,12 +36,12 @@ def line_plot_fn(dataset):
             x_lim=None,
             y_lim=[250, 500],
             stroke_dash=None,
-            tooltip=['DATE', 'HLY-TEMP-NORMAL'],
+            tooltip=["DATE", "HLY-TEMP-NORMAL"],
             overlay_point=False,
             title="Climate",
             stroke_dash_legend_title=None,
             height=300,
-            width=500
+            width=500,
         )
     elif dataset == "seattle_weather":
         return gr.LinePlot(
@@ -57,7 +57,7 @@ def line_plot_fn(dataset):
             title="Seattle Weather",
             stroke_dash_legend_title=None,
             height=300,
-            width=500
+            width=500,
         )
     elif dataset == "gapminder":
         return gr.LinePlot(
@@ -68,12 +68,12 @@ def line_plot_fn(dataset):
             x_lim=[1950, 2010],
             y_lim=None,
             stroke_dash="cluster",
-            tooltip=['country', 'life_expect'],
+            tooltip=["country", "life_expect"],
             overlay_point=False,
             title="Life expectancy for countries",
             stroke_dash_legend_title="Country Cluster",
             height=300,
-            width=500
+            width=500,
         )
 
 

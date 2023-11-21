@@ -27,10 +27,9 @@ demo = gr.Interface(
     outputs=label,
     examples=[
         os.path.join(os.path.dirname(__file__), "images/cheetah1.jpg"),
-        os.path.join(os.path.dirname(__file__), "images/lion.jpg")
-        ]
-    )
+        os.path.join(os.path.dirname(__file__), "images/lion.jpg"),
+    ],
+)
 
 if __name__ == "__main__":
     demo.launch()
-

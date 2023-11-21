@@ -3,12 +3,14 @@ import time
 
 disease_values = [0.25, 0.5, 0.75]
 
+
 def xray_model(diseases, img):
-    return [{disease: disease_values[idx] for idx,disease in enumerate(diseases)}]
+    return [{disease: disease_values[idx] for idx, disease in enumerate(diseases)}]
 
 
 def ct_model(diseases, img):
     return [{disease: 0.1 for disease in diseases}]
+
 
 with gr.Blocks() as demo:
     gr.Markdown(
@@ -22,7 +24,8 @@ With this model you can lorem ipsum
     gr.DuplicateButton()
     disease = gr.CheckboxGroup(
         info="Select the diseases you want to scan for.",
-        choices=["Covid", "Malaria", "Lung Cancer"], label="Disease to Scan For"
+        choices=["Covid", "Malaria", "Lung Cancer"],
+        label="Disease to Scan For",
     )
     slider = gr.Slider(0, 100)
 
@@ -35,7 +38,7 @@ With this model you can lorem ipsum
             xray_model,
             inputs=[disease, xray_scan],
             outputs=xray_results,
-            api_name="xray_model"
+            api_name="xray_model",
         )
 
     with gr.Tab("CT Scan"):
@@ -44,10 +47,7 @@ With this model you can lorem ipsum
             ct_results = gr.JSON()
         ct_run = gr.Button("Run")
         ct_run.click(
-            ct_model,
-            inputs=[disease, ct_scan],
-            outputs=ct_results,
-            api_name="ct_model"
+            ct_model, inputs=[disease, ct_scan], outputs=ct_results, api_name="ct_model"
         )
 
     upload_btn = gr.Button("Upload Results", variant="primary")

@@ -8,12 +8,12 @@ import urllib.request
 source_dir = pathlib.Path(__file__).parent
 
 urllib.request.urlretrieve(
-  'https://gradio-builds.s3.amazonaws.com/demo-files/base.png',
-   str(source_dir / "base.png")
+    "https://gradio-builds.s3.amazonaws.com/demo-files/base.png",
+    str(source_dir / "base.png"),
 )
 urllib.request.urlretrieve(
     "https://gradio-builds.s3.amazonaws.com/demo-files/buildings.png",
-    str(source_dir / "buildings.png")
+    str(source_dir / "buildings.png"),
 )
 
 base_image = Image.open(str(source_dir / "base.png"))

@@ -56,7 +56,6 @@ def get_plot(plot_type):
         )
         return p
     elif plot_type == "scatter":
-
         SPECIES = sorted(data.species.unique())
         MARKERS = ["hex", "circle_x", "triangle"]
 
@@ -78,6 +77,7 @@ def get_plot(plot_type):
         p.legend.location = "top_left"
         p.legend.title = "Species"
         return p
+
 
 with gr.Blocks() as demo:
     with gr.Row():

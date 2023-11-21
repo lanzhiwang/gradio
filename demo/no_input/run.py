@@ -4,7 +4,7 @@ import random
 sentence_list = [
     "Good morning!",
     "Prayers are with you, have a safe day!",
-    "I love you!"
+    "I love you!",
 ]
 
 

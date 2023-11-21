@@ -1,5 +1,7 @@
 import gradio as gr
-#from foo import BAR
+
+
+# from foo import BAR
 #
 def calculator(num1, operation, num2):
     if operation == "add":
@@ -13,13 +15,10 @@ def calculator(num1, operation, num2):
             raise gr.Error("Cannot divide by zero!")
         return num1 / num2
 
+
 demo = gr.Interface(
     calculator,
-    [
-        "number", 
-        gr.Radio(["add", "subtract", "multiply", "divide"]),
-        "number"
-    ],
+    ["number", gr.Radio(["add", "subtract", "multiply", "divide"]), "number"],
     "number",
     examples=[
         [45, "add", 3],

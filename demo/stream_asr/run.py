@@ -4,6 +4,7 @@ import numpy as np
 
 transcriber = pipeline("automatic-speech-recognition", model="openai/whisper-base.en")
 
+
 def transcribe(stream, new_chunk):
     sr, y = new_chunk
     y = y.astype(np.float32)

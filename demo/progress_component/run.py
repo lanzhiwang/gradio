@@ -1,5 +1,6 @@
 import gradio as gr
-import time 
+import time
+
 
 def load_set(progress=gr.Progress()):
     imgs = [None] * 24

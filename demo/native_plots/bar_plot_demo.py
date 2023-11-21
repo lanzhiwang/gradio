@@ -4,10 +4,13 @@ import pandas as pd
 from vega_datasets import data
 
 barley = data.barley()
-simple = pd.DataFrame({
-    'a': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
-    'b': [28, 55, 43, 91, 81, 53, 19, 87, 52]
-})
+simple = pd.DataFrame(
+    {
+        "a": ["A", "B", "C", "D", "E", "F", "G", "H", "I"],
+        "b": [28, 55, 43, 91, 81, 53, 19, 87, 52],
+    }
+)
+
 
 def bar_plot_fn(display):
     if display == "simple":
@@ -18,7 +21,7 @@ def bar_plot_fn(display):
             color=None,
             group=None,
             title="Simple Bar Plot with made up data",
-            tooltip=['a', 'b'],
+            tooltip=["a", "b"],
             y_lim=[20, 100],
             x_title=None,
             y_title=None,
@@ -32,7 +35,7 @@ def bar_plot_fn(display):
             color="site",
             group=None,
             title="Barley Yield Data",
-            tooltip=['variety', 'site'],
+            tooltip=["variety", "site"],
             y_lim=None,
             x_title=None,
             y_title=None,
@@ -60,7 +63,7 @@ def bar_plot_fn(display):
             color=None,
             group=None,
             title="Simple Bar Plot with made up data",
-            tooltip=['a', 'b'],
+            tooltip=["a", "b"],
             y_lim=[20, 100],
             x_title="Variable A",
             y_title="Variable B",
@@ -74,7 +77,7 @@ def bar_plot_fn(display):
             color="site",
             group=None,
             title="Barley Yield Data",
-            tooltip=['variety', 'site'],
+            tooltip=["variety", "site"],
             y_lim=None,
             x_title=None,
             y_title=None,
@@ -93,7 +96,7 @@ def bar_plot_fn(display):
             y_lim=None,
             x_title=None,
             y_title=None,
-            vertical=False
+            vertical=False,
         )
 
 
@@ -101,9 +104,16 @@ with gr.Blocks() as bar_plot:
     with gr.Row():
         with gr.Column():
             display = gr.Dropdown(
-                choices=["simple", "stacked", "grouped", "simple-horizontal", "stacked-horizontal", "grouped-horizontal"],
+                choices=[
+                    "simple",
+                    "stacked",
+                    "grouped",
+                    "simple-horizontal",
+                    "stacked-horizontal",
+                    "grouped-horizontal",
+                ],
                 value="simple",
-                label="Type of Bar Plot"
+                label="Type of Bar Plot",
             )
         with gr.Column():
             plot = gr.BarPlot(show_label=False, show_actions_button=True)

@@ -12,7 +12,12 @@ with gr.Blocks() as demo:
     with gr.Row():
         number = gr.Number(label="On release")
         number2 = gr.Number(label="Number of events fired")
-    slider.release(identity, inputs=[slider, state], outputs=[number, state, number2], api_name="predict")
+    slider.release(
+        identity,
+        inputs=[slider, state],
+        outputs=[number, state, number2],
+        api_name="predict",
+    )
 
 if __name__ == "__main__":
     print("here")

@@ -9,7 +9,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-
 def random_plot():
     start_year = 2020
     x = np.arange(start_year, start_year + 5)
@@ -73,10 +72,13 @@ highlighted_text = "Does Chicago have any Pakistani restaurants"
 
 def random_model3d():
     model_3d = random.choice(
-        [os.path.join(model3d_dir, model) for model in os.listdir(model3d_dir) if model != "source.txt"]
+        [
+            os.path.join(model3d_dir, model)
+            for model in os.listdir(model3d_dir)
+            if model != "source.txt"
+        ]
     )
     return model_3d
-
 
 
 components = [
@@ -103,9 +105,7 @@ components = [
         choices=["a", "b", "c", "d", "e"],
         value=lambda: random.choice(["a", "b", "c"]),
     ),
-    gr.Image(
-        value=lambda: random.choice(images)
-    ),
+    gr.Image(value=lambda: random.choice(images)),
     gr.Video(value=lambda: os.path.join(file_dir, "world.mp4")),
     gr.Audio(value=lambda: os.path.join(file_dir, "cantina.wav")),
     gr.File(
@@ -114,7 +114,9 @@ components = [
         )
     ),
     gr.Dataframe(
-        value=lambda: pd.DataFrame({"random_number_rows": range(5)}, columns=["one", "two", "three"])
+        value=lambda: pd.DataFrame(
+            {"random_number_rows": range(5)}, columns=["one", "two", "three"]
+        )
     ),
     gr.ColorPicker(value=lambda: random.choice(["#000000", "#ff0000", "#0000FF"])),
     gr.Label(value=lambda: random.choice(["Pedestrian", "Car", "Cyclist"])),
@@ -135,9 +137,7 @@ components = [
             ]
         )
     ),
-    gr.Gallery(
-        value=lambda: images
-    ),
+    gr.Gallery(value=lambda: images),
     gr.Model3D(value=random_model3d),
     gr.Plot(value=random_plot),
     gr.Markdown(value=lambda: f"### {random.choice(['Hello', 'Hi', 'Goodbye!'])}"),
@@ -167,12 +167,12 @@ with gr.Blocks() as demo:
     hide.click(
         lambda: [c.__class__(visible=False) for c in components],
         inputs=[],
-        outputs=components
+        outputs=components,
     )
     reveal.click(
         lambda: [c.__class__(visible=True) for c in components],
         inputs=[],
-        outputs=components
+        outputs=components,
     )
     get_value = gr.Button(value="Get Values")
     get_value.click(evaluate_values, components, result)

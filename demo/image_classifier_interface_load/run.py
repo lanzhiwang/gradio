@@ -3,7 +3,11 @@ import pathlib
 
 current_dir = pathlib.Path(__file__).parent
 
-images = [str(current_dir / "cheetah1.jpeg"), str(current_dir / "cheetah1.jpg"), str(current_dir / "lion.jpg")]
+images = [
+    str(current_dir / "cheetah1.jpeg"),
+    str(current_dir / "cheetah1.jpg"),
+    str(current_dir / "lion.jpg"),
+]
 
 
 img_classifier = gr.load(

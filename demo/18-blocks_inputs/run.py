@@ -11,7 +11,6 @@ def mirror(x):
 
 
 with gr.Blocks() as demo:
-
     txt = gr.Textbox(label="Input", lines=2)
     txt_2 = gr.Textbox(label="Input 2")
     txt_3 = gr.Textbox(value="", label="Output")

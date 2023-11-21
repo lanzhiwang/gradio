@@ -27,7 +27,6 @@ def get_count_ride_type():
 
 
 def get_most_popular_stations():
-
     df = pd.read_sql(
         """
     SELECT COUNT(ride_id) as n, MAX(start_station_name) as station
@@ -63,25 +62,25 @@ with gr.Blocks() as demo:
     with gr.Row():
         bike_type = gr.BarPlot(
             x="rideable_type",
-            y='n',
+            y="n",
             title="Number of rides per bicycle type",
             y_title="Number of Rides",
             x_title="Bicycle Type",
             vertical=False,
-            tooltip=['rideable_type', "n"],
+            tooltip=["rideable_type", "n"],
             height=300,
             width=300,
         )
         station = gr.BarPlot(
-            x='station',
-            y='n',
+            x="station",
+            y="n",
             title="Most Popular Stations",
             y_title="Number of Rides",
             x_title="Station Name",
             vertical=False,
-            tooltip=['station', 'n'],
+            tooltip=["station", "n"],
             height=300,
-            width=300
+            width=300,
         )
 
     demo.load(get_count_ride_type, inputs=None, outputs=bike_type)
